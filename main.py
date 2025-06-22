@@ -42,6 +42,29 @@ def game_mode(turn, box):
                 box_to_clear = Oorder[0]
                 del Oorder[0]
 
+
+        if board_state[0] != 0:
+            if board_state[0] == board_state[1]  == board_state[2]:
+               winner = board_state[0]
+            elif board_state[0] == board_state[3] == board_state[6]:
+                winner = board_state[0]
+            elif board_state[0] == board_state[4] == board_state[8]:
+                winner = board_state[0]
+
+        if board_state[4] != 0:
+            if board_state[4] == board_state[3] == board_state[5]:
+                winner = board_state[4]
+            elif board_state[1] == board_state[4] == board_state[7]:
+                winner = board_state[4]
+            elif board_state[6] == board_state[4] == board_state[2]:
+                winner = board_state[4]
+
+        if board_state[8] != 0:
+            if board_state[8] == board_state[7] == board_state[6]:
+                winner = board_state[8]
+            elif board_state[8] == board_state[5] == board_state[2]:
+                winner = board_state[8]
+
         return 2 if turn == 1 else 1, box_to_clear
     return turn, box_to_clear
 
