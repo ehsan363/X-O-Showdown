@@ -91,6 +91,15 @@ def draw_pieces():
             screen.blit(o_active, positions[i])
 
 
+def reset_game():
+    global board_state, Xorder, Oorder, turn, state
+    board_state = [0] * 9
+    Xorder = []
+    Oorder = []
+    turn = random.randint(1, 2)
+    state = 'game'
+
+
 while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -99,39 +108,42 @@ while run:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             x, y = event.pos
 
-            if x >= 525 and x <= 800:
-                if y >= 65 and y <= 340:
-                    turn, box_to_clear, winner = game_mode(turn, 1)
-                elif y >= 355 and y <= 630:
-                    turn, box_to_clear, winner = game_mode(turn, 4)
-                elif y >= 645 and y <= 935:
-                    turn, box_to_clear, winner = game_mode(turn, 7)
+            if state == 'game':
+                if x >= 525 and x <= 800:
+                    if y >= 65 and y <= 340:
+                        turn, box_to_clear, winner = game_mode(turn, 1)
+                    elif y >= 355 and y <= 630:
+                        turn, box_to_clear, winner = game_mode(turn, 4)
+                    elif y >= 645 and y <= 935:
+                        turn, box_to_clear, winner = game_mode(turn, 7)
 
-            elif x >= 815 and x <= 1090:
-                if y >= 65 and y <= 340:
-                    turn, box_to_clear, winner = game_mode(turn, 2)
-                elif y >= 355 and y <= 630:
-                    turn, box_to_clear, winner = game_mode(turn, 5)
-                elif y >= 645 and y <= 935:
-                    turn, box_to_clear, winner = game_mode(turn, 8)
+                elif x >= 815 and x <= 1090:
+                    if y >= 65 and y <= 340:
+                        turn, box_to_clear, winner = game_mode(turn, 2)
+                    elif y >= 355 and y <= 630:
+                        turn, box_to_clear, winner = game_mode(turn, 5)
+                    elif y >= 645 and y <= 935:
+                        turn, box_to_clear, winner = game_mode(turn, 8)
 
-            elif x >= 1105 and x <= 1395:
-                if y >= 65 and y <= 340:
-                    turn, box_to_clear, winner = game_mode(turn, 3)
-                elif y >= 355 and y <= 630:
-                    turn, box_to_clear, winner = game_mode(turn, 6)
-                elif y >= 645 and y <= 935:
-                    turn, box_to_clear, winner = game_mode(turn, 9)
+                elif x >= 1105 and x <= 1395:
+                    if y >= 65 and y <= 340:
+                        turn, box_to_clear, winner = game_mode(turn, 3)
+                    elif y >= 355 and y <= 630:
+                        turn, box_to_clear, winner = game_mode(turn, 6)
+                    elif y >= 645 and y <= 935:
+                        turn, box_to_clear, winner = game_mode(turn, 9)
 
-            if box_to_clear != None:
-                for i in range(len(board_state)):
-                    if i == box_to_clear-1:
-                        board_state[i] = 0
+                if box_to_clear != None:
+                    for i in range(len(board_state)):
+                        if i == box_to_clear-1:
+                            board_state[i] = 0
 
-            print('board_state', board_state)
 
-            if winner != None:
-                state = 'win'
+                if winner != None:
+                    state = 'win'
+
+            elif state == 'win':
+                reset_game()
 
 
     if state == 'game':
@@ -152,13 +164,9 @@ while run:
             print('something went wrong with the turn')
 
     elif state == 'win':
-        print('winner', winner)
-        print(board_state)
-        print()
         if winner == None:
             state = 'game'
         else:
-            board_state = [0] * 9
             screen.fill((40, 40, 40))
             screen.blit(winner_disp, (0, 0))
             if winner == 1:
