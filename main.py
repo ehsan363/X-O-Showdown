@@ -8,19 +8,19 @@ pygame.init()
 screen = pygame.display.set_mode((1920, 1080))
 turn = random.randint(1, 2)
 pygame.display.set_caption('XO Showdown')
-logo = pygame.image.load('tic-tac-toe.png')
+logo = pygame.image.load('images/tic-tac-toe.png')
 pygame.display.set_icon(logo)
 clock = pygame.time.Clock()
 
 state = 'game'
 run = True
 s12 = 0
-table_img = pygame.transform.scale(pygame.image.load('900x900-3x3_table.png').convert_alpha(), (900, 900))
-xnon_active = pygame.transform.scale(pygame.image.load('X non_active.png').convert_alpha(), (200, 200))
-onon_active = pygame.transform.scale(pygame.image.load('O non_active.png').convert_alpha(), (200, 200))
-x_active = pygame.transform.scale(pygame.image.load('X active.png').convert_alpha(), (200, 200))
-o_active = pygame.transform.scale(pygame.image.load('O active.png').convert_alpha(), (200, 200))
-winner_disp = pygame.transform.scale(pygame.image.load('winner_disp.png'), (1920,1080))
+table_img = pygame.transform.scale(pygame.image.load('images/900x900-3x3_table.png').convert_alpha(), (900, 900))
+xnon_active = pygame.transform.scale(pygame.image.load('images/X non_active.png').convert_alpha(), (200, 200))
+onon_active = pygame.transform.scale(pygame.image.load('images/O non_active.png').convert_alpha(), (200, 200))
+x_active = pygame.transform.scale(pygame.image.load('images/X active.png').convert_alpha(), (200, 200))
+o_active = pygame.transform.scale(pygame.image.load('images/O active.png').convert_alpha(), (200, 200))
+winner_disp = pygame.transform.scale(pygame.image.load('images/winner_disp.png'), (1920,1080))
 
 board_state = [0] * 9
 
