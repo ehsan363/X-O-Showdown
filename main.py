@@ -2,6 +2,7 @@ import pygame
 import random
 
 from dulwich.porcelain import remove
+from pygame import MOUSEBUTTONDOWN
 
 pygame.init()
 screen = pygame.display.set_mode((1920, 1080))
@@ -25,16 +26,6 @@ board_state = [0] * 9
 
 Xorder = []
 Oorder = []
-winner = None
-
-
-def winner_display(winner):
-    screen.blit(winner_disp, (0,0))
-    print(winner, 'WON!!!!!')
-    if winner == 1:
-        screen.blit(x_active, (938, 100))
-    elif winner == 2:
-        screen.blit(o_active, (938, 100))
 
 
 def game_mode(turn, box):
@@ -137,16 +128,17 @@ while run:
                     if i == box_to_clear-1:
                         board_state[i] = 0
 
-        if event.type == pygame.MOUSEBUTTONDOWN and winner != None:
-            board_state = [0] * 9
+            print('board_state', board_state)
+
+            if winner != None:
+                state = 'win'
+
 
     if state == 'game':
         screen.fill((40, 40, 40))
         screen.blit(table_img, (510, 50))
 
         draw_pieces()
-        if winner != None:
-            winner_display(winner)
 
         if turn == 1:
             screen.blit(x_active, (50, 30))
@@ -158,6 +150,21 @@ while run:
 
         else:
             print('something went wrong with the turn')
+
+    elif state == 'win':
+        print('winner', winner)
+        print(board_state)
+        print()
+        if winner == None:
+            state = 'game'
+        else:
+            board_state = [0] * 9
+            screen.fill((40, 40, 40))
+            screen.blit(winner_disp, (0, 0))
+            if winner == 1:
+                screen.blit(x_active, (860, 300))
+            elif winner == 2:
+                screen.blit(o_active, (860, 300))
 
     pygame.display.update()
     clock.tick(60)
