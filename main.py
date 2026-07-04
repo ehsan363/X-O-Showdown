@@ -1,8 +1,6 @@
 import pygame
 import random
 
-from dulwich.porcelain import remove
-from pygame import MOUSEBUTTONDOWN
 
 pygame.init()
 screen = pygame.display.set_mode((1920, 1080))
